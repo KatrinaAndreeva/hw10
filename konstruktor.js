@@ -1,21 +1,32 @@
 // 1. Создать конструктор для производства автомобилей.
-// Конструктор должен принимать марку автомобиля и возраст машины. 
-//Конструктор должен иметь метод, который возвращает марку, и
-// второй метод, который возвращает год производства машины 
-//(год текущий минус возраст машины, использовать Date для получения текущего года)
-// var lexus = new Car(‘lexus’, 2);
-// lexus.получитьМарку(); // “Lexus”
-// lexus.получитьГодВыпуска(); // 2014 (2016-2);
-// Марка машины всегда должна возвращаться с большой буквы!
 
 function Cars(name, age) {
-
+    this.name = name;
+    this.age = age;
+    this.displayAge = function() {
+        let today = new Date();
+        return (today.getFullYear() - this.age);
+    };
+    this.displayName = function() {
+        return this.name[0].toUpperCase() + this.name.slice(1);
+    };
 }
+let renault = new Cars('renault', 10);
+console.log(renault.displayAge());
+console.log(renault.displayName());
+
 
 // 2. Написать конструктор, который умеет элементарно шифровать строки 
-// (например, сделать из строки строку-перевертыш, или заменить все символы 
-//     их цифровым представлением, или любой другой метод). Конструктор при
-//      инициализации получает строку и имеет следующие методы:
-// 	a. показать оригинальную строку
-// b. показать зашифрованную строку
-// Строки не должны быть доступны через this, только с помощью методов.
+// 
+function Script(string) {
+    this.displayString = function() {
+        return (this.string = string);
+    };
+    this.displayCode = function() {
+        return (this.string.split('').reverse().join(''));
+    };
+}
+
+let abs = new Script('Qwerty');
+console.log(abs.displayString());
+console.log(abs.displayCode());
