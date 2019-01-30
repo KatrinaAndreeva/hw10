@@ -82,25 +82,32 @@ console.log(stringModule.stringreverse());
 
 //Также можно вызывать методы цепочкой:
 //модуль.установитьЗначение(10).вСтепень(2).узнатьЗначение(); // 100
-var calcModule = (function() {
-    var value = 0;
+let calcModule = (function() {
+    let value = 0;
     return {
         setvalue: function(val) {
             value = val;
+            return this;
         },
         add: function(val) {
             value += val;
+            return this;
         },
         multiply: function(val) {
             value *= val;
+            return this;
+        },
+        pow: function(val) {
+            value = Math.pow(value, val);
+            return this;
         },
         learnvalue: function() {
-            return value;
+            return value.toFixed(2);
         }
-    }
+    };
 }());
 calcModule.setvalue(10);
 calcModule.add(5);
 calcModule.multiply(2);
 console.log(calcModule.learnvalue());
-//console.log(calcModule.setvalue(10).learnvalue());
+console.log(calcModule.setvalue(10).pow(2).learnvalue());
