@@ -6,16 +6,24 @@
 // minus()(); // 0
 // Подсказка, функция minus должна возвращать другую функцию.
 
-function minus(i1, i2) {
-    i1 = i1 | 0;
-    i2 = i2 | 0;
-    return parseInt(i1 - i2);
+function minus(a) {
+    let currentMinus = a | 0;
+
+    function f(b) {
+        currentMinus -= b | 0;
+        return f;
+    }
+    f.toString = function() {
+        return currentMinus;
+    };
+    return f;
 }
-console.log(minus(10, 6));
-console.log(minus(5, 6));
-console.log(minus(10));
-console.log(minus('', 6));
-console.log(minus('', ''));
+
+alert(minus(10)(6));
+alert(minus(5)(6));
+alert(minus(10));
+alert(minus()(6));
+alert(minus()());
 
 //2.  Реализовать функцию, которая умножает и умеет запоминать возвращаемый результат между вызовами:
 // function MultiplyMaker ...
@@ -56,6 +64,9 @@ let stringModule = (function() {
         stringAdd: function(val) {
             string = val;
         },
+        getstring: function() {
+            return string;
+        },
         getStringCount: function() {
             return string.length;
         },
@@ -66,6 +77,7 @@ let stringModule = (function() {
 }());
 
 stringModule.stringAdd('abcde');
+console.log(stringModule.getstring());
 console.log(stringModule.getStringCount());
 console.log(stringModule.stringreverse());
 
@@ -106,6 +118,7 @@ let calcModule = (function() {
         }
     };
 }());
+
 calcModule.setvalue(10);
 calcModule.add(5);
 calcModule.multiply(2);
